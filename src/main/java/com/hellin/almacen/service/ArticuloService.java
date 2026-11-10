@@ -5,6 +5,7 @@ import com.hellin.almacen.repository.ArticuloRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -23,8 +24,15 @@ public class ArticuloService {
     }
 
     public Optional<Map<String, Object>> buscarBasico(Integer id) {
-        // TODO (#n de la incidencia): buscar el artículo por id y devolver un mapa con id, nombre y stock.
-        // Si el stock es 0, añadir "mensaje": "Agotado". Si no existe, Optional.empty().
-        throw new UnsupportedOperationException("Pendiente de implementar");
+        return repositorio.findById(id).map(articulo -> {
+            Map<String, Object> datos = new LinkedHashMap<>();
+            datos.put("id", articulo.getId());
+            datos.put("nombre", articulo.getNombre());
+            datos.put("stock", articulo.getStock());
+            if (articulo.getStock() == 0) {
+                datos.put("mensaje", "Agotado");
+            }
+            return datos;
+        });
     }
 }
