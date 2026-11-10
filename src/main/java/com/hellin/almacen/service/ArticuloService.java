@@ -19,8 +19,7 @@ public class ArticuloService {
     }
 
     public List<Articulo> listarTodos() {
-        // TODO (#n de la incidencia): devolver todos los artículos. Pista: repositorio.findAll()
-        throw new UnsupportedOperationException("Pendiente de implementar");
+        return repositorio.findAll();
     }
 
     public Optional<Map<String, Object>> buscarBasico(Integer id) {
